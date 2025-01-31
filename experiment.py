@@ -219,6 +219,7 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
     optimizer.zero_grad()
 
+    ##reweight edge weights###
     cur_train_edges = torch.cat((unmasked_train_edges,unmasked_neg_edges),dim = -1)
     cur_weight = torch.ones_like(cur_train_edges[0], dtype=torch.float)
     train_weight = torch.empty((len(unmasked_train_edges[0])//2)).uniform_(1,1*reweight)
@@ -248,9 +249,7 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
     # Combine losses
     loss = pos_loss + neg_loss + 0.2 * reg_loss
 
-    
-    #print("[pos loss: ",pos_loss.item()," neg loss: ",neg_loss.item(),"] [lp mean: ",lp.mean().item(),"lp_n mean: ",lp_n.mean().item(),"]")
-    
+
     loss.backward()
     optimizer.step()
 
