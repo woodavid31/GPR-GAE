@@ -251,7 +251,7 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
 
     # Validate every 10 training step
-    if it % 10 == 0 and it > 800:
+    if it % 10 == 0:
         with torch.no_grad():
             gprgae.eval()
             val_auc,val_ap = 0,0
@@ -280,9 +280,6 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
             val_auc_ap = val_auc + val_ap
 
-
-            tqdm_bar = tqdm(range(10), desc="Training Progress")
-            tqdm_bar.set_postfix({"AUC": val_auc, "AP": val_ap})
 
             # save new best model
             if -(val_auc_ap) < best_loss:
