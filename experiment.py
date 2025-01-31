@@ -256,7 +256,7 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
 
     # val step 
-    if it % 3 == 0 and it > 1000:
+    if it % 3 == 0:
         with torch.no_grad():
             # validation
             gprgae.eval()
