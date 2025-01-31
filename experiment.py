@@ -323,7 +323,7 @@ for ep in [0,0.1,0.25,0.5]:
     logits_adv_test = model(attr_orig.to(device), adj_adversary.to(device))
     test_accuracy_adv = accuracy(logits_adv_test.cpu(), labels.cpu(), idx_test)
 
-    print("Attacked test accuracy:",test_accuracy_adv)
+    print("Surrogate test accuracy:",test_accuracy_adv)
 
     gprgae.eval()
     
@@ -334,7 +334,7 @@ for ep in [0,0.1,0.25,0.5]:
     torch.cuda.empty_cache()
 
 
-    print("[Softep: "+str(1)+"] [Terminal Condition: "+str(0.001)+"] [Alpha: "+str(1)+"] | Attacked preprocessed test accuracy:",test_accuracy_adv)
+    print("Attacked gprgae test accuracy:",test_accuracy_adv)
     print("--------------------------------------------------------------------")
     del adj_adversary
     torch.cuda.empty_cache()
