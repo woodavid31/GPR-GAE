@@ -50,7 +50,7 @@ model_params = get_model_params(model_name)
 balance_test=True
 attack = args.attack
 _, _, test_attack_params = attack_params(attack)
-
+test_attack_params['search_space_size'] = args.search_space
 if args.adaptive:
     test_attack_params['loss_type'] = 'Margin' ## The better working loss type for adaptively attacking GPR-GAE
 
