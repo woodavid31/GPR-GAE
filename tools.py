@@ -6,11 +6,6 @@ import torch.nn as nn
 from copy import deepcopy
 import argparse
 import numpy as np
-from sacred import Experiment
-try:
-    import seml
-except:  # noqa: E722
-    seml = None
 import torch
 from tqdm import tqdm
 import torch.nn.functional as F
