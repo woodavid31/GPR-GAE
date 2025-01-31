@@ -39,7 +39,8 @@ install_requires = [
     'tqdm',
     'ogb',
     'torchtyping',
-    'torch-geometric'
+    'torch-geometric',
+    'cvxpy'
 ]
 
 setup(
