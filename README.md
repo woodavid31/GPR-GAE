@@ -22,11 +22,19 @@ torchtyping 0.1.4
 cvxpy 1.2.1
 ```
 
-# experiment.py
+## experiment.py
 Running experiment.py 1.Self-supervisedly trains GPR-GAE, 2.Supervisedly trains the surrogate GNN classifier and evaluate robustness under {adaptive, non-adaptive} attack settings, using either PRBCD or LRBCD.
 
 ```python
-python 
+python experiment.py --dataset cora --attack PRBCD --surrogate GCN
+python experiment.py --dataset cora --attack PRBCD --surrogate GCN --adaptive
+```
+
+## experiment_batch.py
+A batched version of experiment.py for large scale graphs. We train GPR-GAE in mini batches, sampling a portion of the edges every training epoch. batch_ratio = 0.01 for OGB-arXiv. 
+
+```python
+python experiment_batch.py --dataset ogbn-arxiv --attach PRBCD --mask 0.5 --batch_ratio 0.01 --surrogate GCN
 ```
 
 
