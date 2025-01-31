@@ -25,7 +25,7 @@ parser.add_argument('--dataset', type=str,default='citeseer')
 parser.add_argument('--attack', type=str,default='PRBCD')
 parser.add_argument('--device', type=int, default=0)
 parser.add_argument('--seed', type=int, default=0)
-parser.add_argument('--epochs', type=int, default=1700)
+parser.add_argument('--epochs', type=int, default=2000)
 parser.add_argument("--no_print", action='store_true', default=False)
 parser.add_argument("--adaptive", action='store_true', default=False)
 parser.add_argument('--epsilon', type=float, default=1.5)
@@ -52,7 +52,7 @@ attack = args.attack
 _, _, test_attack_params = attack_params(attack)
 
 if args.adaptive:
-    test_attack_params['loss_type'] = 'Margin'
+    test_attack_params['loss_type'] = 'Margin' ## The better working loss type for adaptively attacking GPR-GAE
 
 dataset = args.dataset
 surrogate_model = args.surrogate
