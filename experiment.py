@@ -51,6 +51,7 @@ model_params = get_model_params(model_name)
 balance_test=True
 attack = args.attack
 _, _, test_attack_params = attack_params(attack)
+
 test_attack_params['search_space_size'] = args.search_space
 if args.adaptive:
     test_attack_params['loss_type'] = 'Margin' ## The better working loss type for adaptively attacking GPR-GAE
@@ -219,7 +220,6 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
     optimizer.zero_grad()
 
-    ##reweight edge weights###
     cur_train_edges = torch.cat((unmasked_train_edges,unmasked_neg_edges),dim = -1)
     cur_weight = torch.ones_like(cur_train_edges[0], dtype=torch.float)
     train_weight = torch.empty((len(unmasked_train_edges[0])//2)).uniform_(1,1*reweight)
@@ -248,7 +248,6 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
     # Combine losses
     loss = pos_loss + neg_loss + 0.2 * reg_loss
-
 
     loss.backward()
     optimizer.step()
@@ -325,6 +324,7 @@ for ep in [0,0.1,0.25,0.5]:
 
     print("Surrogate test accuracy:",test_accuracy_adv)
 
+
     gprgae.eval()
     
     with torch.no_grad():
@@ -335,6 +335,7 @@ for ep in [0,0.1,0.25,0.5]:
 
 
     print("Attacked gprgae test accuracy:",test_accuracy_adv)
+
     print("--------------------------------------------------------------------")
     del adj_adversary
     torch.cuda.empty_cache()
