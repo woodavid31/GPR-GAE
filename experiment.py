@@ -25,7 +25,8 @@ parser.add_argument('--dataset', type=str,default='citeseer')
 parser.add_argument('--attack', type=str,default='PRBCD')
 parser.add_argument('--device', type=int, default=0)
 parser.add_argument('--seed', type=int, default=0)
-parser.add_argument('--epochs', type=int, default=1700)
+parser.add_argument('--epochs', type=int, default=2000)
+parser.add_argument('--search_space', type=int, default=10000)
 parser.add_argument("--no_print", action='store_true', default=False)
 parser.add_argument("--adaptive", action='store_true', default=False)
 parser.add_argument('--epsilon', type=float, default=1.5)
@@ -51,8 +52,9 @@ balance_test=True
 attack = args.attack
 _, _, test_attack_params = attack_params(attack)
 
+test_attack_params['search_space_size'] = args.search_space
 if args.adaptive:
-    test_attack_params['loss_type'] = 'Margin'
+    test_attack_params['loss_type'] = 'Margin' ## The better working loss type for adaptively attacking GPR-GAE
 
 dataset = args.dataset
 surrogate_model = args.surrogate
@@ -247,15 +249,12 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
     # Combine losses
     loss = pos_loss + neg_loss + 0.2 * reg_loss
 
-    
-    #print("[pos loss: ",pos_loss.item()," neg loss: ",neg_loss.item(),"] [lp mean: ",lp.mean().item(),"lp_n mean: ",lp_n.mean().item(),"]")
-    
     loss.backward()
     optimizer.step()
 
 
     # val step 
-    if it % 3 == 0 and it > 1000:
+    if it % 3 == 0:
         with torch.no_grad():
             # validation
             gprgae.eval()
@@ -323,7 +322,8 @@ for ep in [0,0.1,0.25,0.5]:
     logits_adv_test = model(attr_orig.to(device), adj_adversary.to(device))
     test_accuracy_adv = accuracy(logits_adv_test.cpu(), labels.cpu(), idx_test)
 
-    print("Attacked test accuracy:",test_accuracy_adv)
+    print("Surrogate test accuracy:",test_accuracy_adv)
+
 
     gprgae.eval()
     
@@ -334,7 +334,8 @@ for ep in [0,0.1,0.25,0.5]:
     torch.cuda.empty_cache()
 
 
-    print("[Softep: "+str(1)+"] [Terminal Condition: "+str(0.001)+"] [Alpha: "+str(1)+"] | Attacked preprocessed test accuracy:",test_accuracy_adv)
+    print("Attacked gprgae test accuracy:",test_accuracy_adv)
+
     print("--------------------------------------------------------------------")
     del adj_adversary
     torch.cuda.empty_cache()

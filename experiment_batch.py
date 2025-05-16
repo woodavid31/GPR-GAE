@@ -25,7 +25,7 @@ parser.add_argument('--dataset', type=str,default='ogbn-arxiv')
 parser.add_argument('--attack', type=str,default='PRBCD')
 parser.add_argument('--device', type=int, default=0)
 parser.add_argument('--seed', type=int, default=0)
-parser.add_argument('--epochs', type=int, default=1700)
+parser.add_argument('--epochs', type=int, default=2000)
 parser.add_argument('--search_space', type=int, default=3000000)
 parser.add_argument("--no_print", action='store_true', default=False)
 parser.add_argument("--adaptive", action='store_true', default=False)
@@ -251,7 +251,7 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
 
     # Validate every 10 training step
-    if it % 10 == 0 and it > 800:
+    if it % 10 == 0:
         with torch.no_grad():
             gprgae.eval()
             val_auc,val_ap = 0,0
@@ -280,9 +280,6 @@ for it in tqdm(range(train_epoch), desc="Training Progress", leave=True):
 
             val_auc_ap = val_auc + val_ap
 
-
-            tqdm_bar = tqdm(range(10), desc="Training Progress")
-            tqdm_bar.set_postfix({"AUC": val_auc, "AP": val_ap})
 
             # save new best model
             if -(val_auc_ap) < best_loss:
