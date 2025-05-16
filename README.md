@@ -34,7 +34,7 @@ python experiment.py --dataset cora --attack PRBCD --surrogate GCN --adaptive
 A batched version of experiment.py for large scale graphs. We train GPR-GAE in mini batches, sampling a portion of the edges every training epoch. batch_ratio = 0.01 for OGB-arXiv. 
 
 ```python
-python experiment_batch.py --dataset ogbn-arxiv --attach PRBCD --mask 0.5 --batch_ratio 0.01 --surrogate GCN
+python experiment_batch.py --dataset ogbn-arxiv --attack PRBCD --mask 0.5 --batch_ratio 0.01 --surrogate GCN
 ```
 
 
