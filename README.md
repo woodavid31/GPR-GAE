@@ -1,6 +1,6 @@
 # Self-supervised Adversarial Purification for Graph Neural Networks
 This is the repository with the source codes for ICML 2025 paper "Self-supervised Adversarial Purification for Graph Neural Networks".
-
+---
 
 ## Installation
 The packages used for running the code (do pip install . to install the modules)
@@ -25,9 +25,9 @@ cvxpy 1.2.1
 ```
 
 ## experiment.py
-The run command below \n
-1.Self-supervisedly trains GPR-GAE, \n 
-2.Supervisedly trains the surrogate GNN classifier and \n 
+The run command below \
+1.Self-supervisedly trains GPR-GAE, \
+2.Supervisedly trains the surrogate GNN classifier and \
 3.Evaluate robustness under {adaptive, non-adaptive} attack settings.
 
 ```python
