@@ -1,4 +1,6 @@
 # Self-supervised Adversarial Purification for Graph Neural Networks
+This is the repository with the source codes for ICML 2025 paper "Self-supervised Adversarial Purification for Graph Neural Networks".
+
 
 ## Installation
 The packages used for running the code (do pip install . to install the modules)
