@@ -25,9 +25,9 @@ cvxpy 1.2.1
 ```
 
 ## experiment.py
-The run command below
-1.Self-supervisedly trains GPR-GAE, 
-2.Supervisedly trains the surrogate GNN classifier and 
+The run command below \n
+1.Self-supervisedly trains GPR-GAE, \n 
+2.Supervisedly trains the surrogate GNN classifier and \n 
 3.Evaluate robustness under {adaptive, non-adaptive} attack settings.
 
 ```python
