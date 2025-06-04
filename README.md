@@ -25,10 +25,10 @@ cvxpy 1.2.1
 ```
 
 ## experiment.py
-Run the command below \
-1.Self-supervisedly trains GPR-GAE, \
-2.Supervisedly trains the surrogate GNN classifier and \
-3.Evaluate robustness under {adaptive, non-adaptive} attack settings.
+Running the command below does: \
+1.Self-supervised training for GPR-GAE, \
+2.Supervised training for the surrogate GNN classifier and \
+3.Evaluates robustness under {adaptive, non-adaptive} attack settings.
 
 ```python
 python experiment.py --dataset cora --attack PRBCD --surrogate GCN
