@@ -42,7 +42,7 @@ A batched version of experiment.py for large scale graphs. We train GPR-GAE in m
 python experiment_batch.py --dataset ogbn-arxiv --attack PRBCD --mask 0.5 --batch_ratio 0.01 --surrogate GCN
 ```
 
-##Citation
+## Citation
 
 ```bibtex
 @inproceedings{lee2025self,
