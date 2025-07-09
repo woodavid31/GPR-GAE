@@ -1,5 +1,7 @@
 # Self-supervised Adversarial Purification for Graph Neural Networks
 This is the repository with the source codes for ICML 2025 paper "Self-supervised Adversarial Purification for Graph Neural Networks".\
+
+##
 Our implementation is based on https://github.com/saper0/adversarial_training.
 ---
 
